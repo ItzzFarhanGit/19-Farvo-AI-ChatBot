@@ -1,0 +1,15 @@
+{
+  "name": "farvo-ai-chatbot",
+  "version": "2.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Farvo AI - Gemini chatbot with Postgres database, accounts and synced chat history (Vercel)",
+  "engines": { "node": "22.x" },
+  "scripts": {
+    "dev": "vercel dev",
+    "test": "npm i --no-save @electric-sql/pglite && node tests/run.mjs"
+  },
+  "dependencies": {
+    "pg": "^8.13.0"
+  }
+}

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#05060b">
+  <title>Chat — Farvo AI</title>
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <link href="css/style.css" rel="stylesheet">
+</head>
+<body class="chat-page">
+<div class="app">
+  <div class="backdrop" id="backdrop"></div>
+
+  <aside class="sidebar glass" id="sidebar">
+    <div class="brand-wrap">
+      <a class="logo-link" href="https://farvodigital.netlify.app" target="_blank" rel="noopener" aria-label="Farvo Digital portfolio"><img class="logo" src="assets/farvo-logo.webp" alt="Farvo Digital logo" width="38" height="38"></a>
+      <a class="brand" href="index.html">Farvo AI</a>
+    </div>
+    <button id="newChat" class="btn btn-glow btn-block"><span data-ic="plus"></span>New chat</button>
+    <input id="search" class="field" placeholder="Search chats" aria-label="Search chats" autocomplete="off">
+    <div id="chatList" class="chat-list"></div>
+    <div class="side-foot">
+      <div id="account"></div>
+      <button id="settingsBtn" class="btn btn-ghost btn-block"><span data-ic="sliders"></span>Settings</button>
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="topbar">
+      <button id="menuBtn" class="icon-btn" aria-label="Menu"><span data-ic="menu"></span></button>
+      <strong id="chatTitle">New chat</strong>
+      <span class="status"><i></i>Online</span>
+      <button id="exportBtn" class="icon-btn" title="Download chat" aria-label="Download chat"><span data-ic="download"></span></button>
+    </div>
+
+    <div id="messages" class="messages" aria-live="polite"><div class="loading">Loading…</div></div>
+
+    <div class="composer glass">
+      <div id="attachStrip" class="attach-strip"></div>
+      <textarea id="input" rows="1" maxlength="4000" placeholder="Message Farvo AI…" aria-label="Message"></textarea>
+      <div class="composer-row">
+        <small class="muted"><span id="chars">0</span>/4000 characters · ~<span id="tokens">0</span> tokens</small>
+        <input type="file" id="fileInput" hidden multiple accept="image/*,.pdf,.txt,.md,.csv,.json,.html,.js,.py">
+        <button id="attachBtn" class="icon-btn" title="Attach images or files" aria-label="Attach"><span data-ic="clip"></span></button>
+        <button id="send" class="btn btn-glow" aria-label="Send"><span data-ic="up"></span></button>
+      </div>
+    </div>
+    <p class="foot-note">Farvo AI can make mistakes. Check important info. · © <span id="yr"></span> <a href="https://farvodigital.netlify.app" target="_blank" rel="noopener">Farvo Digital Company</a></p>
+  </main>
+</div>
+
+<!-- Settings -->
+<div class="overlay" id="settingsModal">
+  <div class="modal">
+    <div class="modal-head"><h5>Settings</h5><button class="icon-btn" data-close aria-label="Close"><span data-ic="x"></span></button></div>
+    <label class="lbl" for="setTheme">Theme</label>
+    <select id="setTheme" class="field"><option value="dark">Dark</option><option value="light">Light</option></select>
+    <div class="switch-row"><label for="setTyping">Typing animation for replies</label><input type="checkbox" id="setTyping"></div>
+    <button id="clearAll" class="btn btn-danger btn-block"><span data-ic="trash"></span>Clear all history</button>
+    <button id="deleteAcc" class="btn btn-danger btn-block" style="margin-top:.6rem;display:none"><span data-ic="user"></span>Delete my account</button>
+  </div>
+</div>
+
+<!-- Sign in / Create account -->
+<div class="overlay" id="authModal">
+  <div class="modal">
+    <div class="modal-head"><h5 id="authTitle">Sign in</h5><button class="icon-btn" data-close aria-label="Close"><span data-ic="x"></span></button></div>
+    <p class="muted" style="font-size:.9rem">Sign in to save your chats in the cloud and open them on any device.</p>
+    <div class="tabs"><button id="tabLogin" class="on" type="button">Sign in</button><button id="tabReg" type="button">Create account</button></div>
+    <div id="nameWrap" style="display:none"><label class="lbl" for="aName">Name</label><input id="aName" class="field" autocomplete="name" maxlength="60"></div>
+    <label class="lbl" for="aEmail">Email</label><input id="aEmail" class="field" type="email" autocomplete="email" inputmode="email" autocapitalize="none">
+    <label class="lbl" for="aPass">Password <span id="passHint" style="display:none">(min 8 characters)</span></label><input id="aPass" class="field" type="password" autocomplete="current-password" maxlength="128">
+    <div class="form-err" id="authErr"></div>
+    <button id="authGo" class="btn btn-glow btn-block btn-lg" type="button">Sign in</button>
+  </div>
+</div>
+
+<div id="toast" class="toast-lite"></div>
+
+<script src="js/app.js"></script>
+<script src="js/md.js"></script>
+<script src="js/chat.js"></script>
+</body>
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#05060b">
+  <title>Farvo AI — Smart assistant by Farvo Digital</title>
+  <meta name="description" content="Farvo AI is a fast AI chat assistant from Farvo Digital. Sign in to keep your chats on every device.">
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <link href="css/style.css" rel="stylesheet">
+</head>
+<body>
+  <nav class="nav-glass">
+    <div class="container nav-in">
+      <div class="brand-wrap">
+        <a class="logo-link" href="https://farvodigital.netlify.app" target="_blank" rel="noopener" aria-label="Farvo Digital portfolio"><img class="logo" src="assets/farvo-logo.webp" alt="Farvo Digital logo" width="38" height="38"></a>
+        <a class="brand" href="index.html">Farvo AI</a>
+      </div>
+      <button id="navToggle" class="icon-btn" aria-label="Menu"><span data-ic="menu"></span></button>
+      <div class="nav-menu" id="nav">
+        <a class="nav-link" href="#features">Features</a>
+        <a class="nav-link" href="#about">About</a>
+        <button id="themeBtn" class="icon-btn" title="Toggle theme" aria-label="Toggle theme"><span data-ic="moon"></span></button>
+        <a href="chat.html" class="btn btn-glow">Open chat</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero container">
+    <div class="hero-grid">
+      <div class="hero-text">
+        <span class="pill"><span data-ic="star"></span>Powered by Google Gemini</span>
+        <h1>Meet <span class="gt">Farvo AI</span>.<br>Ask anything, get answers fast.</h1>
+        <p class="lead muted">A smart assistant from Farvo Digital that writes, codes, explains and plans with you. Sign in and your chats follow you from phone to desktop.</p>
+        <div class="cta-row">
+          <a href="chat.html" class="btn btn-glow btn-lg">Start chatting<span style="margin-left:.4rem" data-ic="right"></span></a>
+          <a href="#features" class="btn btn-ghost btn-lg">See features</a>
+        </div>
+        <div class="stats">
+          <div><b class="gt">Instant</b><span>replies</span></div>
+          <div><b class="gt">Synced</b><span>chat history</span></div>
+          <div><b class="gt">Any device</b><span>phone to desktop</span></div>
+        </div>
+      </div>
+      <div class="hero-side">
+        <div class="glass preview">
+          <a class="orbit" href="https://farvodigital.netlify.app" target="_blank" rel="noopener" aria-label="Farvo Digital portfolio"><img class="logo" style="width:72px;height:72px" src="assets/farvo-logo.webp" alt="Farvo Digital logo"></a>
+          <div class="msg user"><div class="bubble-wrap"><div class="bubble">Explain debounce in one line.</div></div></div>
+          <div class="msg ai"><div class="avatar"><img src="assets/farvo-logo.webp" alt=""></div><div class="bubble-wrap"><div class="bubble">Debounce delays a function until input has stopped for a set time.<pre><code>const d = (fn, ms) => { let t; return (...a) => { clearTimeout(t); t = setTimeout(() => fn(...a), ms); }; };</code></pre></div></div></div>
+          <div class="msg ai" style="margin-bottom:0"><div class="avatar"><img src="assets/farvo-logo.webp" alt=""></div><div class="bubble"><span class="dots"><i></i><i></i><i></i></span></div></div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section id="features" class="container section">
+    <h2 class="reveal">Built to <span class="gt">impress</span>, made for daily use</h2>
+    <div class="grid3">
+      <div class="reveal"><div class="glass feature"><div class="fi"><span data-ic="zap"></span></div><h5>Instant answers</h5><p class="muted" style="margin:0">Powered by Google Gemini for quick, accurate replies to almost anything.</p></div></div>
+      <div class="reveal"><div class="glass feature"><div class="fi"><span data-ic="clip"></span></div><h5>Images and files</h5><p class="muted" style="margin:0">Attach photos, PDFs or text files and ask about them.</p></div></div>
+      <div class="reveal"><div class="glass feature"><div class="fi"><span data-ic="code"></span></div><h5>Markdown and code</h5><p class="muted" style="margin:0">Tables, lists and code blocks with one-tap copy.</p></div></div>
+      <div class="reveal"><div class="glass feature"><div class="fi"><span data-ic="db"></span></div><h5>Cloud chat history</h5><p class="muted" style="margin:0">Create a free account and your conversations are saved in a secure database.</p></div></div>
+      <div class="reveal"><div class="glass feature"><div class="fi"><span data-ic="lock"></span></div><h5>Secure by design</h5><p class="muted" style="margin:0">Hashed passwords, private sessions, and the AI key never leaves the server.</p></div></div>
+      <div class="reveal"><div class="glass feature"><div class="fi"><span data-ic="phone"></span></div><h5>Made for every screen</h5><p class="muted" style="margin:0">Smooth on phones, tablets and wide desktops. Dark and light themes.</p></div></div>
+    </div>
+  </section>
+
+  <section class="container section">
+    <h2 class="reveal">How it works</h2>
+    <div class="grid3">
+      <div class="reveal"><div class="glass step"><div class="n">01</div><h5>Open the chat</h5><p class="muted" style="margin:0">Tap Start chatting. Guests can try it instantly, no sign-up needed.</p></div></div>
+      <div class="reveal"><div class="glass step"><div class="n">02</div><h5>Ask anything</h5><p class="muted" style="margin:0">Write, code, translate, plan or learn. Type it the way you speak.</p></div></div>
+      <div class="reveal"><div class="glass step"><div class="n">03</div><h5>Sign in to sync</h5><p class="muted" style="margin:0">Create an account to keep every chat and open it on any device.</p></div></div>
+    </div>
+  </section>
+
+  <section id="about" class="container section reveal">
+    <div class="glass cta">
+      <div class="hero-logo" style="margin-bottom:1.6rem"><a href="https://farvodigital.netlify.app" target="_blank" rel="noopener" aria-label="Farvo Digital portfolio"><img src="assets/farvo-logo.webp" alt="Farvo Digital logo"></a></div>
+      <h2 style="margin-bottom:0">Built by <span class="gt">Farvo Digital</span></h2>
+      <p class="muted">Code. Design. Create. Tap the logo to see our portfolio.</p>
+      <div class="cta-row">
+        <a href="chat.html" class="btn btn-glow btn-lg">Open Farvo AI</a>
+        <a href="https://farvodigital.netlify.app" target="_blank" rel="noopener" class="btn btn-ghost btn-lg">Visit portfolio</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="container site-foot muted">
+    <span>© <span id="yr"></span> <a href="https://farvodigital.netlify.app" target="_blank" rel="noopener">Farvo Digital Company</a>. All rights reserved.</span><span>Farvo AI</span>
+  </footer>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
