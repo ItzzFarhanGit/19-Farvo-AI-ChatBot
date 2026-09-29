@@ -1,50 +1,136 @@
-# Farvo AI — Gemini chatbot + Postgres database (Vercel)
+# 🤖 Farvo AI Chatbot
 
-Static frontend + Vercel serverless API + PostgreSQL (Neon).
-- **Guests**: chat instantly, history stays in the browser.
-- **Signed-in users**: register / login, chats saved in the database and available on every device.
-- Guest chats are imported into the account automatically on first sign-in.
-- Phone-friendly (works on old Android browsers too), dark/light theme, image/PDF attachments, Markdown + code copy.
+**Farvo AI** is a Gemini-powered AI chatbot by **Farvo Digital**, with user accounts and saved chat history. It runs on Vercel serverless functions and stores data in a Neon PostgreSQL database.
 
-## Deploy (all free)
+🔗 **Live demo:** https://farvo-ai-chatbot.vercel.app
 
-1. **Gemini key** — https://aistudio.google.com/apikey
-2. **Push this folder to GitHub.**
-3. **Vercel** → Add New → Project → import the repo → Framework **Other** → no build command → *don't deploy yet*.
-4. **Database** — in the Vercel project: **Storage → Create Database → Neon (Postgres)** → connect to this project.
-   Vercel adds `DATABASE_URL` automatically. (Supabase also works: put its Postgres connection string in `DATABASE_URL`.)
-5. **Settings → Environment Variables** → add `GEMINI_API_KEY` = your key.
-6. **Deploy.** Tables are created automatically on the first request (`db/schema.sql` is there for reference).
-7. Open `https://YOUR-APP.vercel.app/api/health` — should show `"database":"connected"` and `"gemini_key":true`.
+---
 
-Tip: Settings → Functions → set the region close to your Neon database (e.g. Singapore) for faster replies.
-Added the variables after deploying? Redeploy once.
+## ✨ Features
 
-## Environment variables
+- 💬 AI chat powered by **Google Gemini**
+- 🔐 Sign up and log in with email and password (passwords are hashed, sessions use hashed tokens)
+- 🗂️ Chat history saved per user in **PostgreSQL**
+- 📱 Responsive chat interface for desktop and mobile
+- ⏱️ Configurable daily message limit
+- ☁️ Serverless deployment on **Vercel**
 
-| Name | Required | Notes |
-|---|---|---|
-| `GEMINI_API_KEY` | yes | Google AI Studio key |
-| `DATABASE_URL` | for accounts | Postgres URL (added by Neon integration). Without it the app still works in guest mode |
-| `GEMINI_MODEL` | no | default `gemini-3.8-flash` (falls back to 3.5-flash, 3.5-flash-lite, 3.1-flash-lite) |
-| `DAILY_LIMIT` | no | messages per user per day, default 150 (0 = unlimited) |
-| `DEBUG_ERRORS` | no | `1` shows the exact Gemini error in chat while debugging |
+---
 
-## Local run
+## 🛠️ Tech Stack
+
+| Layer      | Technology                          |
+| ---------- | ----------------------------------- |
+| Frontend   | HTML, CSS, JavaScript               |
+| Backend    | Node.js serverless functions (`/api`) |
+| AI         | Google Gemini API                   |
+| Database   | Neon (Serverless PostgreSQL)        |
+| Hosting    | Vercel                              |
+
+---
+
+## 📁 Project Structure
+
 ```
+19-Farvo-AI-ChatBot/
+├── api/            # Serverless API routes
+├── assets/         # Images and static assets
+├── css/            # Stylesheets
+├── db/             # Database schema (schema.sql)
+├── js/             # Frontend scripts
+├── lib/            # Shared backend helpers
+├── tests/          # Tests
+├── chat.html       # Chat page
+├── index.html      # Landing / login page
+├── vercel.json     # Vercel configuration
+├── package.json
+└── .env.example    # Environment variable template
+```
+
+---
+
+## 🗄️ Database
+
+The app uses PostgreSQL with 4 tables:
+
+| Table      | Purpose                               |
+| ---------- | ------------------------------------- |
+| `users`    | User accounts (email, password hash)  |
+| `sessions` | Login sessions (hashed tokens, expiry) |
+| `chats`    | Chat conversations per user           |
+| `messages` | User and assistant messages per chat  |
+
+The schema is in `db/schema.sql`. The app creates the tables automatically on the first request, or you can run the file manually in the Neon SQL Editor.
+
+---
+
+## ⚙️ Environment Variables
+
+Copy `.env.example` to `.env.local` for local development. On Vercel, add these under **Settings → Environment Variables**.
+
+| Variable         | Required | Description                                             |
+| ---------------- | -------- | ------------------------------------------------------- |
+| `GEMINI_API_KEY` | ✅       | Google Gemini API key (https://aistudio.google.com/apikey) |
+| `DATABASE_URL`   | ✅       | PostgreSQL connection string (Vercel adds it when you connect Neon) |
+| `GEMINI_MODEL`   | Optional | Gemini model name to use                                |
+| `DAILY_LIMIT`    | Optional | Max messages per day (default in `.env.example`)        |
+| `DEBUG_ERRORS`   | Optional | Set to `1` to show exact Gemini error text while debugging. Remove in production. |
+
+> ⚠️ Never commit your real `.env` file or API keys to GitHub.
+
+---
+
+## 🚀 Deploy on Vercel
+
+1. Push this repo to GitHub.
+2. Go to https://vercel.com/new and **Import** the repository.
+3. Framework Preset: **Other**.
+4. In your Vercel project, open **Storage → Create Database → Neon**, then **Connect Project**. `DATABASE_URL` is added automatically.
+5. Under **Settings → Environment Variables**, add `GEMINI_API_KEY` (Production, Preview and Development).
+6. Click **Deploy** (or **Redeploy** after adding variables).
+7. Open your live URL, sign up, and start chatting.
+
+---
+
+## 💻 Run Locally
+
+```bash
+# 1. Clone the repo
+git clone https://github.com/ItzzFarhanGit/19-Farvo-AI-ChatBot.git
+cd 19-Farvo-AI-ChatBot
+
+# 2. Install dependencies
 npm install
-cp .env.example .env.local   # fill values
-npx vercel dev
+
+# 3. Set up environment variables
+cp .env.example .env.local
+# then fill in GEMINI_API_KEY and DATABASE_URL
+
+# 4. Run with the Vercel CLI
+npm i -g vercel
+vercel dev
 ```
 
-## API
-`POST /api/auth/register|login|logout|delete` · `GET /api/auth/me` · `POST /api/chat` · `GET|DELETE /api/chats` ·
-`GET|PATCH|DELETE /api/chats/:id` · `POST /api/chats/import` · `GET /api/health`
+---
 
-## Security notes
-Passwords hashed with scrypt; sessions are random tokens stored hashed in the DB (HttpOnly, Secure, SameSite=Lax cookie);
-every chat query is scoped to the signed-in user; cross-site POSTs are rejected; the Gemini key never reaches the browser.
-The in-memory rate limit is best-effort — for heavy public traffic add Redis (Upstash) rate limiting.
+## 🧩 Troubleshooting
 
-## Tests
-`npm test` runs API tests against an in-memory Postgres with a mocked Gemini.
+- **Chat gives no reply:** check that `GEMINI_API_KEY` is set for Production and that you redeployed after adding it. Set `DEBUG_ERRORS=1` temporarily to see the exact error.
+- **"Model not found" error:** set `GEMINI_MODEL` to a model available for your API key (see Google AI Studio).
+- **Sign up fails:** check `DATABASE_URL` in Environment Variables and confirm the tables exist in the `public` schema.
+- **Env variable changes not applied:** Vercel needs a new deployment. Use **Deployments → ⋯ → Redeploy**.
+
+---
+
+## 👨‍💻 Author
+
+**Mohamed Farhan** — Full Stack Web Developer & UI/UX Designer (**FARVO**)
+
+- 🔗 LinkedIn: https://linkedin.com/in/mohamedfarhan-it
+- 🐙 GitHub: [@ItzzFarhanGit](https://github.com/ItzzFarhanGit)
+
+---
+
+## 📄 License
+
+This project is for learning and portfolio purposes. Add a license file if you plan to open-source it.
